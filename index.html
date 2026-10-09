@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
      <title>Bipin Thapa | Portfolio</title>
-    <title>Bipin Thapa | CODER</title>
 
 <meta name="description" content="Official website of Bipin Thapa. Learn C Programming, C++, coding tutorials, projects and programming resources.">
-
 <meta name="keywords" content="Bipin Thapa, C Programming, C++, Programming Teacher, Coding, Developer, Nepal">
-
 <meta name="author" content="Bipin Thapa">
+
+    <!-- Minimal favicon / brand icon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
 
 <meta property="og:title" content="Bipin Thapa | C Programming Teacher & Developer">
 <meta property="og:description" content="Programming tutorials, projects and coding resources.">
@@ -16,7 +17,6 @@
 <meta property="og:url" content="https://www.bipinthapa0.com.np">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -37,10 +37,10 @@
 
         :root {
             --bg-primary: #0a0f1f;
-            --bg-secondary: #111827;
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --border-glass: rgba(255, 255, 255, 0.05);
-            --border-hover: rgba(255, 255, 255, 0.12);
+            --bg-secondary: #0d1225;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.15);
 
             --color-1: #f472b6;
             --color-2: #a78bfa;
@@ -62,7 +62,7 @@
         }
 
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: auto; /* Lenis handles smooth scroll */
         }
 
         body {
@@ -90,6 +90,22 @@
         }
 
         /* ============================================================
+                   CURSOR GLOW
+                   ============================================================ */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(167,139,250,0.07) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            will-change: transform;
+        }
+
+        /* ============================================================
                    PRELOADER
                    ============================================================ */
         #preloader {
@@ -100,7 +116,7 @@
             align-items: center;
             justify-content: center;
             z-index: 99999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1), visibility 0.8s;
         }
         #preloader.hidden {
             opacity: 0;
@@ -110,45 +126,38 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 24px;
+            gap: 28px;
         }
-        .pl-shapes {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+        .pl-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.24em;
+            padding-left: 0.24em;
+            background: linear-gradient(135deg, var(--color-1), var(--color-2), var(--color-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .pl-shapes span {
-            width: 16px;
-            height: 16px;
+        .pl-bar-track {
+            width: 160px;
+            height: 3px;
+            background: rgba(255,255,255,0.06);
             border-radius: 4px;
-            animation: plBounce 1.2s ease-in-out infinite;
+            overflow: hidden;
         }
-        .pl-shapes span:nth-child(1) {
-            background: var(--color-1);
-            animation-delay: 0s;
+        .pl-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--color-1), var(--color-2), var(--color-3));
+            border-radius: 4px;
+            animation: plFill 1.6s ease-in-out forwards;
         }
-        .pl-shapes span:nth-child(2) {
-            background: var(--color-2);
-            animation-delay: 0.2s;
-        }
-        .pl-shapes span:nth-child(3) {
-            background: var(--color-3);
-            animation-delay: 0.4s;
-        }
-        .pl-shapes span:nth-child(4) {
-            background: var(--color-4);
-            animation-delay: 0.6s;
-        }
-        .pl-shapes span:nth-child(5) {
-            background: var(--color-5);
-            animation-delay: 0.8s;
-        }
-        @keyframes plBounce {
-            0%, 80%, 100% { transform: scale(0.6) translateY(0); opacity: 0.4; }
-            40% { transform: scale(1.2) translateY(-16px); opacity: 1; }
+        @keyframes plFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
         .pl-text {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 6px;
             color: var(--text-muted);
             font-weight: 500;
@@ -165,7 +174,7 @@
             width: 92%;
             max-width: 1140px;
             padding: 6px 20px 6px 24px;
-            background: rgba(10, 15, 31, 0.75);
+            background: rgba(10, 15, 31, 0.7);
             backdrop-filter: blur(20px) saturate(1.6);
             -webkit-backdrop-filter: blur(20px) saturate(1.6);
             border: 1px solid var(--border-glass);
@@ -175,6 +184,13 @@
             justify-content: space-between;
             z-index: 1000;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .navbar.scrolled {
+            background: rgba(10, 15, 31, 0.92);
+            padding: 4px 20px 4px 24px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.1);
         }
 
         .logo {
@@ -196,12 +212,19 @@
             font-size: 0.8rem;
             color: #fff;
             font-weight: 700;
+            overflow: hidden;
+        }
+        .logo-photo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .logo-text {
             color: var(--text-primary);
         }
         .logo-text span {
-            color: var(--text-muted);
+            color: var(--color-2);
             font-weight: 300;
         }
 
@@ -217,12 +240,24 @@
             font-weight: 500;
             color: var(--text-secondary);
             transition: var(--transition);
+            position: relative;
         }
         .nav-links a:hover,
         .nav-links a.active {
             background: var(--bg-card);
             color: #fff;
             border: 1px solid var(--border-glass);
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-1), var(--color-2));
+            border-radius: 2px;
         }
         .nav-links a.nav-cta {
             background: linear-gradient(135deg, var(--color-1), var(--color-2));
@@ -232,7 +267,7 @@
         }
         .nav-links a.nav-cta:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 25px rgba(167, 139, 250, 0.25);
+            box-shadow: 0 4px 25px rgba(167, 139, 250, 0.3);
         }
 
         .hamburger {
@@ -275,12 +310,12 @@
             text-align: center;
         }
 
-        #three-canvas {
+        #hero-network {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
         }
 
@@ -297,19 +332,52 @@
             position: relative;
             margin-bottom: 24px;
         }
+        /* Orbit ring around avatar */
+        .hero-avatar-ring::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-top-color: var(--color-1);
+            border-right-color: var(--color-2);
+            animation: orbitSpin 6s linear infinite;
+            opacity: 0.5;
+        }
+        .hero-avatar-ring::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-bottom-color: var(--color-3);
+            border-left-color: var(--color-4);
+            animation: orbitSpin 8s linear infinite reverse;
+            opacity: 0.3;
+        }
+        @keyframes orbitSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .hero-avatar {
             width: 160px;
             height: 160px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--border-glass);
-            box-shadow: 0 0 60px rgba(167, 139, 250, 0.08);
+            box-shadow: 0 0 60px rgba(167, 139, 250, 0.12);
             transition: var(--transition);
         }
         .hero-avatar:hover {
-            transform: scale(1.04);
             border-color: var(--color-2);
-            box-shadow: 0 0 80px rgba(167, 139, 250, 0.15);
+            box-shadow: 0 0 80px rgba(167, 139, 250, 0.2);
         }
         .hero-status {
             position: absolute;
@@ -409,15 +477,16 @@
             gap: 10px;
             border: none;
             cursor: pointer;
+            position: relative;
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--color-1), var(--color-2));
             color: #fff;
-            box-shadow: 0 4px 30px rgba(167, 139, 250, 0.15);
+            box-shadow: 0 4px 30px rgba(167, 139, 250, 0.2);
         }
         .btn-primary:hover {
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 45px rgba(167, 139, 250, 0.25);
+            box-shadow: 0 8px 45px rgba(167, 139, 250, 0.35);
         }
         .btn-secondary {
             background: var(--bg-card);
@@ -428,6 +497,7 @@
             background: var(--border-glass);
             color: #fff;
             transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
         .hero-social {
@@ -445,14 +515,15 @@
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-size: 0.9rem;
         }
         .hero-social a:hover {
             background: var(--border-glass);
             color: var(--color-1);
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.15) rotateY(180deg);
             border-color: var(--color-1);
+            box-shadow: 0 4px 20px rgba(244, 114, 182, 0.2);
         }
 
         .scroll-indicator {
@@ -485,6 +556,7 @@
                    ============================================================ */
         section {
             padding: 80px 0;
+            position: relative;
         }
 
         .section-label {
@@ -530,7 +602,7 @@
         }
 
         /* ============================================================
-                   GLASS CARDS
+                   GLASS CARDS with 3D TILT
                    ============================================================ */
         .glass-card {
             background: var(--bg-card);
@@ -539,12 +611,31 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-lg);
             padding: 28px 24px;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .glass-card:hover::before {
+            opacity: 1;
         }
         .glass-card:hover {
             border-color: var(--border-hover);
-            transform: translateY(-6px);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(167, 139, 250, 0.05);
         }
 
         .glass-card-sm {
@@ -553,11 +644,40 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-md);
             padding: 20px 18px;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            perspective: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card-sm::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .glass-card-sm:hover::before {
+            opacity: 1;
         }
         .glass-card-sm:hover {
             border-color: var(--border-hover);
-            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Tilt shine overlay (added by JS) */
+        .tilt-shine {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255,255,255,0.06), transparent 60%);
         }
 
         /* ============================================================
@@ -579,6 +699,8 @@
             font-size: 0.95rem;
             line-height: 1.8;
             margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
         }
         .about-content p strong {
             color: var(--text-primary);
@@ -589,6 +711,8 @@
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 16px;
+            position: relative;
+            z-index: 2;
         }
         .about-tags span {
             padding: 4px 14px;
@@ -598,6 +722,11 @@
             font-size: 0.75rem;
             color: var(--text-secondary);
             font-weight: 500;
+            transition: var(--transition);
+        }
+        .about-tags span:hover {
+            border-color: var(--color-4);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.1);
         }
         .about-tags span .bx {
             margin-right: 4px;
@@ -610,6 +739,8 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             margin-top: 20px;
+            position: relative;
+            z-index: 2;
         }
         .stat-box {
             text-align: center;
@@ -617,6 +748,11 @@
             background: var(--bg-card);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-glass);
+            transition: var(--transition);
+        }
+        .stat-box:hover {
+            border-color: var(--color-2);
+            transform: translateY(-3px);
         }
         .stat-box .num {
             font-family: 'Space Grotesk', sans-serif;
@@ -642,20 +778,20 @@
             border: 1px solid var(--border-glass);
             position: relative;
             overflow: hidden;
+            transition: var(--transition);
         }
-        .about-visual .big-letter {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--color-2), var(--color-1), var(--color-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.15;
-            animation: floatSlow 6s ease-in-out infinite;
+        .about-visual:hover {
+            border-color: var(--color-2);
+            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.08);
         }
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(3deg); }
+        .about-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .about-visual:hover img {
+            transform: scale(1.04);
         }
 
         /* ============================================================
@@ -679,29 +815,29 @@
             border: 1px solid var(--border-glass);
             transition: var(--transition);
             cursor: pointer;
+            transform-style: preserve-3d;
         }
         .gallery-item:first-child {
             aspect-ratio: auto;
             min-height: 320px;
         }
         .gallery-item:hover {
-            transform: scale(1.02);
             border-color: var(--color-2);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(167, 139, 250, 0.08);
         }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
         .gallery-item .overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(10, 15, 31, 0.8), transparent);
+            background: linear-gradient(to top, rgba(10, 15, 31, 0.85), transparent);
             opacity: 0;
             transition: var(--transition);
             display: flex;
@@ -736,19 +872,158 @@
         }
 
         .edu-item {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 24px;
-            padding: 18px 24px;
+            padding: 0 24px;
             background: var(--bg-card);
             border-radius: var(--radius-md);
             border: 1px solid var(--border-glass);
             transition: var(--transition);
-            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        .edu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--color-2), var(--color-1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .edu-item:hover::before {
+            opacity: 1;
         }
         .edu-item:hover {
             border-color: var(--color-2);
             transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(167, 139, 250, 0.08);
+        }
+        .edu-toggle {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 100px minmax(0, 1fr) 24px;
+            align-items: center;
+            gap: 24px;
+            padding: 18px 0;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+        }
+        .edu-toggle:hover .edu-info-title {
+            color: var(--color-2);
+        }
+        .edu-toggle:focus-visible {
+            outline: 2px solid var(--color-2);
+            outline-offset: -3px;
+            border-radius: var(--radius-sm);
+        }
+        .edu-toggle-icon {
+            color: var(--color-2);
+            font-size: 1.35rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .edu-toggle:hover .edu-toggle-icon {
+            transform: translateX(4px);
+        }
+        .edu-details-template {
+            display: none;
+        }
+        .edu-modal[hidden] {
+            display: none;
+        }
+        .edu-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: rgba(3, 7, 18, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .edu-modal-card {
+            position: relative;
+            width: min(100%, 560px);
+            max-height: min(80vh, 720px);
+            overflow-y: auto;
+            padding: 32px;
+            border: 1px solid rgba(167, 139, 250, 0.28);
+            border-radius: var(--radius-lg);
+            background: linear-gradient(145deg, rgba(18, 24, 45, 0.98), rgba(10, 15, 31, 0.98));
+            box-shadow: 0 28px 90px rgba(0, 0, 0, 0.58), 0 0 50px rgba(167, 139, 250, 0.09);
+            overscroll-behavior: contain;
+        }
+        .edu-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: grid;
+            width: 40px;
+            height: 40px;
+            place-items: center;
+            border: 1px solid var(--border-glass);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.04);
+            font-size: 1.35rem;
+            cursor: pointer;
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+        .edu-modal-close:hover,
+        .edu-modal-close:focus-visible {
+            color: var(--text-primary);
+            border-color: var(--color-2);
+            background: rgba(167, 139, 250, 0.12);
+        }
+        .edu-modal-close:focus-visible {
+            outline: 2px solid var(--color-2);
+            outline-offset: 3px;
+        }
+        .edu-modal-year {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--color-2);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .edu-modal-title {
+            padding-right: 32px;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            line-height: 1.25;
+        }
+        .edu-modal-subtitle {
+            margin-top: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .edu-modal-content {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .edu-modal-content p {
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.045);
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.025);
+        }
+        .edu-modal-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
         }
         .edu-year {
             font-family: 'Space Grotesk', sans-serif;
@@ -756,7 +1031,8 @@
             font-weight: 700;
             color: var(--color-2);
         }
-        .edu-info h4 {
+        .edu-info-title {
+            display: block;
             font-size: 1.05rem;
             font-weight: 600;
         }
@@ -767,6 +1043,27 @@
         .edu-info .date {
             color: var(--text-muted);
             font-size: 0.75rem;
+        }
+        @media (max-width: 600px) {
+            .edu-item {
+                padding: 0 16px;
+            }
+            .edu-toggle {
+                grid-template-columns: 64px minmax(0, 1fr) 20px;
+                gap: 12px;
+            }
+            .edu-modal {
+                padding: 16px;
+            }
+            .edu-modal-card {
+                padding: 26px 20px 22px;
+                border-radius: var(--radius-md);
+                max-height: 85vh;
+            }
+            .edu-modal-close {
+                top: 12px;
+                right: 12px;
+            }
         }
 
         /* ============================================================
@@ -788,12 +1085,18 @@
         }
         .skill-pill:hover {
             border-color: var(--color-1);
-            transform: translateY(-6px);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(244, 114, 182, 0.1);
         }
         .skill-pill .bx {
             font-size: 2.2rem;
             color: var(--color-2);
             margin-bottom: 6px;
+            transition: var(--transition);
+        }
+        .skill-pill:hover .bx {
+            color: var(--color-1);
+            transform: scale(1.2) rotateY(360deg);
         }
         .skill-pill h4 {
             font-size: 0.9rem;
@@ -825,12 +1128,17 @@
         }
         .interest-box:hover {
             border-color: var(--color-3);
-            transform: translateY(-6px) scale(1.02);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(96, 165, 250, 0.1);
         }
         .interest-box .bx {
             font-size: 2.4rem;
             color: var(--color-3);
             margin-bottom: 8px;
+            transition: var(--transition);
+        }
+        .interest-box:hover .bx {
+            transform: scale(1.2) rotate(-10deg);
         }
         .interest-box h4 {
             font-size: 0.95rem;
@@ -843,7 +1151,7 @@
         }
 
         /* ============================================================
-                   CONTACT - NEW "WANT TO CONNECT" SECTION
+                   CONTACT
                    ============================================================ */
         .contact-wrap {
             display: grid;
@@ -855,6 +1163,8 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.3rem;
             margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
         }
 
         .contact-item {
@@ -864,9 +1174,12 @@
             color: var(--text-secondary);
             margin-bottom: 12px;
             transition: var(--transition);
+            position: relative;
+            z-index: 2;
         }
         .contact-item:hover {
             color: var(--text-primary);
+            transform: translateX(4px);
         }
         .contact-item .bx {
             width: 38px;
@@ -880,6 +1193,11 @@
             font-size: 1.1rem;
             color: var(--color-2);
             flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .contact-item:hover .bx {
+            background: rgba(167, 139, 250, 0.1);
+            border-color: var(--color-2);
         }
 
         .contact-status {
@@ -893,6 +1211,8 @@
             gap: 10px;
             font-size: 0.85rem;
             color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
         }
         .contact-status .dot {
             width: 10px;
@@ -911,6 +1231,8 @@
             display: flex;
             gap: 10px;
             margin-top: 16px;
+            position: relative;
+            z-index: 2;
         }
         .contact-social-links a {
             width: 40px;
@@ -922,17 +1244,18 @@
             align-items: center;
             justify-content: center;
             color: var(--text-muted);
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-size: 1rem;
         }
         .contact-social-links a:hover {
-            background: var(--border-glass);
+            background: rgba(244, 114, 182, 0.08);
             color: var(--color-1);
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.1);
             border-color: var(--color-1);
+            box-shadow: 0 4px 20px rgba(244, 114, 182, 0.15);
         }
 
-        /* ===== NEW: WANT TO CONNECT CARD ===== */
+        /* ===== CONNECT CARD ===== */
         .connect-card {
             text-align: center;
             padding: 40px 32px;
@@ -946,7 +1269,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 30% 20%, rgba(167, 139, 250, 0.03), transparent 60%);
+            background: radial-gradient(circle at 30% 20%, rgba(167, 139, 250, 0.04), transparent 60%);
             pointer-events: none;
         }
 
@@ -974,6 +1297,8 @@
             font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
         }
         .connect-card h3 .gradient {
             background: linear-gradient(135deg, var(--color-1), var(--color-2));
@@ -986,58 +1311,115 @@
             font-size: 0.95rem;
             max-width: 400px;
             margin: 0 auto 24px;
+            position: relative;
+            z-index: 2;
         }
 
-        .connect-email-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 60px;
-            padding: 6px 6px 6px 24px;
-            transition: var(--transition);
-            cursor: pointer;
+        /* Contact form */
+        .contact-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+            position: relative;
+            z-index: 2;
         }
-        .connect-email-box:hover {
-            border-color: var(--color-2);
-            box-shadow: 0 0 40px rgba(167, 139, 250, 0.06);
-            transform: scale(1.02);
+
+        .contact-form-group {
+            margin-bottom: 14px;
         }
-        .connect-email-box .email-icon {
-            font-size: 1.3rem;
-            color: var(--color-2);
-        }
-        .connect-email-box .email-text {
-            font-size: 0.95rem;
-            color: var(--text-primary);
+
+        .contact-form-group label {
+            display: block;
+            margin: 0 0 7px 2px;
+            color: var(--text-muted);
+            font-size: .75rem;
             font-weight: 500;
         }
-        .connect-email-box .email-arrow {
-            background: linear-gradient(135deg, var(--color-1), var(--color-2));
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-        .connect-email-box:hover .email-arrow {
-            transform: translateX(4px);
-            box-shadow: 0 4px 20px rgba(167, 139, 250, 0.2);
+
+        .contact-form-group input,
+        .contact-form-group textarea {
+            width: 100%;
+            display: block;
+            padding: 12px 13px;
+            background: rgba(255,255,255,0.02);
+            color: #f5f5f5;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            outline: none;
+            font: inherit;
+            font-size: .86rem;
+            transition: border-color .3s ease, background .3s ease, box-shadow .3s ease;
         }
 
-        .connect-email-box a {
+        .contact-form-group input::placeholder,
+        .contact-form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .contact-form-group input:focus,
+        .contact-form-group textarea:focus {
+            border-color: var(--color-2);
+            background: rgba(167, 139, 250, 0.03);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.06);
+        }
+
+        .contact-form-group textarea {
+            min-height: 112px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            width: 100%;
             display: flex;
             align-items: center;
-            gap: 16px;
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 18px;
+            margin-top: 4px;
+            background: linear-gradient(135deg, var(--color-1), var(--color-2));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font: inherit;
+            font-size: .86rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s ease;
+            box-shadow: 0 4px 20px rgba(167, 139, 250, 0.15);
         }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(167, 139, 250, 0.25);
+        }
+
+        .contact-form button:disabled {
+            opacity: .6;
+            cursor: wait;
+            transform: none;
+        }
+
+        .form-status {
+            min-height: 22px;
+            margin-top: 11px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: .76rem;
+        }
+
+        .form-status.success { color: var(--color-4); }
+        .form-status.error { color: var(--color-1); }
+
+        .form-note {
+            margin-top: 14px !important;
+            font-size: .7rem !important;
+            color: var(--text-muted) !important;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-note .bx { margin-right: 4px; }
 
         /* ============================================================
                    FOOTER
@@ -1051,6 +1433,40 @@
         }
         footer .bx {
             color: var(--color-1);
+        }
+
+        /* ============================================================
+                   GSAP ANIMATION INITIAL STATES
+                   ============================================================ */
+        .anim-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .anim-fade-left {
+            opacity: 0;
+            transform: translateX(-40px);
+        }
+        .anim-fade-right {
+            opacity: 0;
+            transform: translateX(40px);
+        }
+        .anim-scale-in {
+            opacity: 0;
+            transform: scale(0.85);
+        }
+        .anim-pop-in {
+            opacity: 0;
+            transform: scale(0.7) translateY(20px);
+        }
+
+        /* Hero entrance states */
+        .hero-anim-avatar {
+            opacity: 0;
+            transform: translateY(-50px) scale(0.8);
+        }
+        .hero-anim-content {
+            opacity: 0;
+            transform: translateY(30px);
         }
 
         /* ============================================================
@@ -1072,21 +1488,14 @@
                 min-height: auto;
             }
             .edu-item {
-                grid-template-columns: 1fr;
-                gap: 4px;
+                padding: 0 20px;
+            }
+            .edu-toggle {
+                grid-template-columns: 72px minmax(0, 1fr) 24px;
+                gap: 16px;
             }
             .edu-year {
                 font-size: 1.1rem;
-            }
-            .connect-email-box {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding: 12px 16px;
-                border-radius: var(--radius-md);
-            }
-            .connect-email-box .email-arrow {
-                width: 100%;
-                justify-content: center;
             }
         }
 
@@ -1121,12 +1530,10 @@
             .hamburger {
                 display: flex;
             }
-
             .hero-avatar {
                 width: 130px;
                 height: 130px;
             }
-
             .about-stats-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
@@ -1134,16 +1541,13 @@
             .stat-box .num {
                 font-size: 1.2rem;
             }
-
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
-
             .scroll-indicator {
                 display: none;
             }
-
             .connect-card {
                 padding: 28px 16px;
             }
@@ -1155,8 +1559,8 @@
             .connect-card h3 {
                 font-size: 1.3rem;
             }
-            .connect-email-box .email-text {
-                font-size: 0.85rem;
+            .cursor-glow {
+                display: none;
             }
         }
 
@@ -1182,28 +1586,37 @@
             .section-head {
                 font-size: 1.6rem;
             }
-            .connect-email-box {
-                padding: 10px 14px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
-            .connect-email-box .email-text {
-                font-size: 0.8rem;
-            }
-            .connect-email-box .email-arrow {
-                font-size: 0.75rem;
-                padding: 8px 14px;
+            .anim-fade-up, .anim-fade-left, .anim-fade-right,
+            .anim-scale-in, .anim-pop-in,
+            .hero-anim-avatar, .hero-anim-content {
+                opacity: 1 !important;
+                transform: none !important;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <!-- ============================================================
     PRELOADER
     ============================================================ -->
     <div id="preloader">
         <div class="pl-container">
-            <div class="pl-shapes">
-                <span></span><span></span><span></span><span></span><span></span>
+            <div class="pl-brand" aria-label="Bipin">BIPIN</div>
+            <div class="pl-bar-track">
+                <div class="pl-bar-fill"></div>
             </div>
             <span class="pl-text">LOADING</span>
         </div>
@@ -1214,7 +1627,7 @@
     ============================================================ -->
     <nav class="navbar">
         <a href="#hero" class="logo">
-            <span class="logo-mark">BT</span>
+            <span class="logo-mark"><img src="myphoto.jpg" alt="Bipin Thapa" class="logo-photo"/></span>
             <span class="logo-text">Bipin<span>.</span></span>
         </a>
 
@@ -1236,45 +1649,45 @@
     HERO
     ============================================================ -->
     <section id="hero">
-        <canvas id="three-canvas"></canvas>
+        <canvas id="hero-network" aria-hidden="true"></canvas>
 
         <div class="hero-center">
-            <div class="hero-avatar-ring">
+            <div class="hero-avatar-ring hero-anim-avatar">
                 <img src="myphoto.jpg" alt="Bipin Thapa" class="hero-avatar" id="profileImg"/>
                 <span class="hero-status"></span>
             </div>
 
-            <div class="hero-badge">
+            <div class="hero-badge hero-anim-content">
                 <i class='bx bx-check-circle'></i>
                 Available for Opportunities
             </div>
 
-            <h1 class="hero-title">
+            <h1 class="hero-title hero-anim-content">
                 Hi, I'm <br><span class="gradient">Bipin Thapa</span>
             </h1>
 
-            <p class="hero-desc">
-                +2 Science Graduate · Aspiring Web Developer &amp; Cybersecurity Enthusiast
+            <p class="hero-desc hero-anim-content">
+                +2 Science Graduate · Currently pursuing BSc CSIT · Aspiring Web Developer &amp; Cybersecurity Enthusiast
             </p>
 
-            <div class="hero-location">
+            <div class="hero-location hero-anim-content">
                 <i class='bx bx-map-pin'></i>
-               LAMAHI, Dang, Nepal
+               Lumbini Province Dang, Nepal
             </div>
 
-            <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary">
+            <div class="hero-actions hero-anim-content">
+                <a href="#contact" class="btn btn-primary magnetic-btn">
                     <i class='bx bx-paper-plane'></i> Contact Me
                 </a>
-                <a href="#about" class="btn btn-secondary">
+                <a href="#about" class="btn btn-secondary magnetic-btn">
                     <i class='bx bx-chevron-down'></i> Learn More
                 </a>
             </div>
 
-            <div class="hero-social">
+            <div class="hero-social hero-anim-content">
                 <a href="https://github.com/bipin890" aria-label="GitHub"><i class='bx bxl-github'></i></a>
                 <a href="https://www.facebook.com/bipiny07" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
-                <a href="https://www.tiktok.com/@_voidwalker.x?_r=1&_t=ZS-97QWrlAcCT2" aria-label="Twitter"><i class='bx bxl-tiktok'></i></a>
+                <a href="https://www.tiktok.com/@_voidwalker.x?_r=1&_t=ZS-97QWrlAcCT2" aria-label="TikTok"><i class='bx bxl-tiktok'></i></a>
                 <a href="https://www.instagram.com/kaelrix_0?igsh=MjM0eDR4NzA1bXpi" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
             </div>
         </div>
@@ -1290,23 +1703,26 @@
     ============================================================ -->
     <section id="about">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header anim-fade-up">
                 <span class="section-label"><i class='bx bx-user'></i> About Me</span>
                 <h2 class="section-head">Know Who <span class="gradient">I Am</span></h2>
                 <p class="section-desc">A passionate learner on a mission to build a career in technology.</p>
             </div>
 
             <div class="about-wrapper">
-                <div class="about-content glass-card">
+                <div class="about-content glass-card tilt-card anim-fade-left">
+                    <div class="tilt-shine"></div>
                     <p>
-                        I am a highly motivated <strong>+2 Science graduate</strong> from Adarsha Secondary School, Deuipur, 
-                        with a strong passion for <strong style="color: var(--color-2);">Web Development</strong> and 
+                        I completed <strong>+2 Science</strong> at Adarsha Secondary School, Deupur, and am currently
+                        pursuing a <strong>Bachelor of Science in Computer Science and Information Technology (BSc CSIT)</strong>
+                        at Mahendra Multiple Campus, Dang. I have a strong passion for
+                        <strong style="color: var(--color-2);">Web Development</strong> and
                         <strong style="color: var(--color-1);">Cybersecurity</strong>.
                     </p>
                     <p>
                         Although I'm at the beginning of my professional journey, I'm a <strong>fast learner</strong> with 
-                        foundational skills in HTML, CSS, and computer applications. I am actively seeking 
-                        opportunities to apply my knowledge, learn from industry experts, and contribute 
+                        foundational skills in HTML, CSS, C, C++, and C#, and basic knowledge of Python and PHP.
+                        I am actively seeking opportunities to apply my knowledge, learn from industry experts, and contribute
                         meaningfully to innovative projects.
                     </p>
 
@@ -1319,7 +1735,7 @@
 
                     <div class="about-stats-grid">
                         <div class="stat-box">
-                            <div class="num">+2</div>
+                            <div class="num" data-count="+2">+2</div>
                             <div class="lbl">Science (2026)</div>
                         </div>
                         <div class="stat-box">
@@ -1333,8 +1749,9 @@
                     </div>
                 </div>
 
-                <div class="about-visual">
-                    <span class="big-letter">BT</span>
+                <div class="about-visual anim-fade-right tilt-card">
+                    <div class="tilt-shine"></div>
+                    <img src="myphoto.jpg" alt="Bipin Thapa"/>
                 </div>
             </div>
         </div>
@@ -1345,30 +1762,35 @@
     ============================================================ -->
     <section id="gallery">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header anim-fade-up">
                 <span class="section-label"><i class='bx bx-images'></i> Gallery</span>
                 <h2 class="section-head">My <span class="gradient">Moments</span></h2>
                 <p class="section-desc">A glimpse into my world through photos.</p>
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item">
+                <div class="gallery-item anim-scale-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <img src="coding.png" alt="Bipin Thapa Photo 1" loading="lazy"/>
-                    <div class="overlay"><span><i class='bx bx-camera'></i> Explore Cybersecurity/span></div>
+                    <div class="overlay"><span><i class='bx bx-camera'></i> Explore Cybersecurity</span></div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item anim-scale-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <img src="teaching.png" alt="Bipin Thapa Photo 2" loading="lazy"/>
                     <div class="overlay"><span><i class='bx bx-camera'></i> Teaching C</span></div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item anim-scale-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <img src="pic.jpg" alt="Bipin Thapa Photo 3" loading="lazy"/>
-                    <div class="overlay"><span><i class='bx bx-camera'></i>SEtUp </span></div>
+                    <div class="overlay"><span><i class='bx bx-camera'></i> Setup</span></div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item anim-scale-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <img src="photo.png" alt="Bipin Thapa Photo 4" loading="lazy"/>
                     <div class="overlay"><span><i class='bx bx-camera'></i> Weekend Moment</span></div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item anim-scale-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <img src="tool.jpg" alt="Bipin Thapa Photo 5" loading="lazy"/>
                     <div class="overlay"><span><i class='bx bx-camera'></i> Network Jammer</span></div>
                 </div>
@@ -1381,71 +1803,161 @@
     ============================================================ -->
     <section id="education">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header anim-fade-up">
                 <span class="section-label"><i class='bx bx-book-open'></i> Education</span>
                 <h2 class="section-head">My <span class="gradient">Journey</span></h2>
                 <p class="section-desc">My academic path and achievements so far.</p>
             </div>
 
             <div class="edu-timeline">
-                <div class="edu-item">
-                    <div class="edu-year">2026</div>
-                    <div class="edu-info">
-                        <h4>+2 Science (Higher Secondary)</h4>
-                        <div class="school">Adarsha Secondary School, Deuipur, Deukhuri, Dang</div>
-                        <div class="date">Completed: June 19, 2026</div>
-                    </div>
+                <div class="edu-item anim-fade-left tilt-card">
+                    <div class="tilt-shine"></div>
+                    <button class="edu-toggle" id="edu-toggle-bsc" type="button" data-edu-details="edu-details-bsc" aria-haspopup="dialog" aria-controls="education-modal">
+                        <span class="edu-year">Present</span>
+                        <span class="edu-info">
+                            <span class="edu-info-title">Bachelor of Science in Computer Science and Information Technology (BSc CSIT)T</span>
+                            <span class="school">Mahendra Multiple Campus, Dang</span>
+                            <span class="date"><br>Currently pursuing · Expected completion: 2030</span>
+                        </span>
+                        <i class='bx bx-right-arrow-alt edu-toggle-icon' aria-hidden="true"></i>
+                    </button>
+                    <template class="edu-details-template" id="edu-details-bsc">
+                            <p><strong>Program:</strong> Bachelor of Science in Computer Science and Information Technology (BSc CSIT)</p>
+                            <p><strong>Location:</strong> Ghorahi, Dang, Nepal</p>
+                            <p><strong>Status:</strong> Currently pursuing</p>
+                            <p><strong>Expected<br> completion:</strong> 2030</p>
+                            <p><strong>Goal:</strong> Develop networking skills for a cybersecurity career, building on my existing web development background.</p>
+                    </template>
                 </div>
-                <div class="edu-item">
-                    <div class="edu-year">2024</div>
-                    <div class="edu-info">
-                        <h4>SEE (Secondary Education Examination)</h4>
-                        <div class="school">Adarsha Secondary School, Deuipur, Deukhuri, Dang</div>
-                        <div class="date">Completed: July 14, 2024</div>
-                    </div>
+                <div class="edu-item anim-fade-left tilt-card">
+                    <div class="tilt-shine"></div>
+                    <button class="edu-toggle" id="edu-toggle-plus-two" type="button" data-edu-details="edu-details-plus-two" aria-haspopup="dialog" aria-controls="education-modal">
+                        <span class="edu-year">2026</span>
+                        <span class="edu-info">
+                            <span class="edu-info-title">+2 Science (Higher Secondary)</span>
+                            <span class="school">Adarsha Secondary School, Deupur, Deukhuri, Dang</span>
+                            <span class="date"><br>Completed</span>
+                        </span>
+                        <i class='bx bx-right-arrow-alt edu-toggle-icon' aria-hidden="true"></i>
+                    </button>
+                    <template class="edu-details-template" id="edu-details-plus-two">
+                            <p><strong>Stream:</strong> Science with Computer Science</p>
+                            <p><strong>GPA:</strong> 3.00</p>
+                            <p><strong>Completed:</strong> June 19, 2026</p>
+                    </template>
+                </div>
+                <div class="edu-item anim-fade-left tilt-card">
+                    <div class="tilt-shine"></div>
+                    <button class="edu-toggle" id="edu-toggle-see" type="button" data-edu-details="edu-details-see" aria-haspopup="dialog" aria-controls="education-modal">
+                        <span class="edu-year">2024</span>
+                        <span class="edu-info">
+                            <span class="edu-info-title">SEE (Secondary Education Examination)</span>
+                            <span class="school">Adarsha Secondary School, Deupur, Deukhuri, Dang</span>
+                            <span class="date"><br>Completed</span>
+                        </span>
+                        <i class='bx bx-right-arrow-alt edu-toggle-icon' aria-hidden="true"></i>
+                    </button>
+                    <template class="edu-details-template" id="edu-details-see">
+                            <p><strong>GPA:</strong> 3.17</p>
+                            <p><strong>Completed:</strong> July 14, 2024</p>
+                    </template>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="edu-modal" id="education-modal" role="dialog" aria-modal="true" aria-labelledby="edu-modal-title" aria-describedby="edu-modal-subtitle" aria-hidden="true" inert hidden>
+        <div class="edu-modal-card" tabindex="-1">
+            <button class="edu-modal-close" type="button" aria-label="Close education details">
+                <i class='bx bx-x' aria-hidden="true"></i>
+            </button>
+            <span class="edu-modal-year" id="edu-modal-year"></span>
+            <h3 class="edu-modal-title" id="edu-modal-title"></h3>
+            <p class="edu-modal-subtitle" id="edu-modal-subtitle"></p>
+            <div class="edu-modal-content" id="edu-modal-content"></div>
+        </div>
+    </div>
 
     <!-- ============================================================
     SKILLS
     ============================================================ -->
     <section id="skills">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header anim-fade-up">
                 <span class="section-label"><i class='bx bx-code-alt'></i> Skills</span>
                 <h2 class="section-head">What I <span class="gradient">Know</span></h2>
                 <p class="section-desc">Technologies and abilities I'm building every day.</p>
             </div>
 
             <div class="skills-wrap">
-                <div class="glass-card-sm skill-pill">
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bxl-html5'></i>
-                    <h4>HTML &amp; CSS</h4>
+                    <h4>HTML</h4>
                     <p>Basic to intermediate</p>
                 </div>
-                <div class="glass-card-sm skill-pill">
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
+                    <i class='bx bxl-css3'></i>
+                    <h4>CSS</h4>
+                    <p>Basic to intermediate</p>
+                </div>
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
+                    <i class='bx bx-code-alt'></i>
+                    <h4>C</h4>
+                    <p>Programming fundamentals</p>
+                </div>
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
+                    <i class='bx bx-code-alt'></i>
+                    <h4>C++</h4>
+                    <p>Programming fundamentals</p>
+                </div>
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
+                    <i class='bx bx-code-alt'></i>
+                    <h4>C#</h4>
+                    <p>Programming fundamentals</p>
+                </div>
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
+                    <i class='bx bxl-python'></i>
+                    <h4>Python</h4>
+                    <p>Basic</p>
+                </div>
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
+                    <i class='bx bxl-php'></i>
+                    <h4>PHP</h4>
+                    <p>Basic</p>
+                </div>
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-code'></i>
                     <h4>Web Development</h4>
                     <p>Frontend fundamentals</p>
                 </div>
-                <div class="glass-card-sm skill-pill">
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-laptop'></i>
                     <h4>MS Office Suite</h4>
                     <p>Word, Excel, PowerPoint</p>
                 </div>
-                <div class="glass-card-sm skill-pill">
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-rocket'></i>
                     <h4>Fast Learner</h4>
                     <p>Quick to adapt &amp; grow</p>
                 </div>
-                <div class="glass-card-sm skill-pill">
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-brain'></i>
                     <h4>Problem Solving</h4>
                     <p>Analytical thinking</p>
                 </div>
-                <div class="glass-card-sm skill-pill">
+                <div class="glass-card-sm skill-pill anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-shield'></i>
                     <h4>Cybersecurity</h4>
                     <p>Enthusiast &amp; learner</p>
@@ -1459,29 +1971,33 @@
     ============================================================ -->
     <section id="interests">
         <div class="container">
-            <div class="section-header center">
+            <div class="section-header center anim-fade-up">
                 <span class="section-label"><i class='bx bx-heart'></i> Interests</span>
                 <h2 class="section-head">What <span class="gradient">Drives Me</span></h2>
                 <p class="section-desc">Passions that fuel my daily motivation.</p>
             </div>
 
             <div class="interests-wrap">
-                <div class="glass-card-sm interest-box">
+                <div class="glass-card-sm interest-box anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-chip'></i>
                     <h4>Technology</h4>
                     <p>Always exploring new tech</p>
                 </div>
-                <div class="glass-card-sm interest-box">
+                <div class="glass-card-sm interest-box anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-code-block'></i>
                     <h4>Coding</h4>
                     <p>Building &amp; creating</p>
                 </div>
-                <div class="glass-card-sm interest-box">
+                <div class="glass-card-sm interest-box anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-shield-alt'></i>
                     <h4>Cyber Security</h4>
                     <p>Protecting digital assets</p>
                 </div>
-                <div class="glass-card-sm interest-box">
+                <div class="glass-card-sm interest-box anim-pop-in tilt-card">
+                    <div class="tilt-shine"></div>
                     <i class='bx bx-graduation'></i>
                     <h4>Learning New Skills</h4>
                     <p>Continuous improvement</p>
@@ -1491,11 +2007,11 @@
     </section>
 
     <!-- ============================================================
-    CONTACT - NEW "WANT TO CONNECT" SECTION
+    CONTACT
     ============================================================ -->
     <section id="contact">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header anim-fade-up">
                 <span class="section-label"><i class='bx bx-envelope'></i> Contact</span>
                 <h2 class="section-head">Let's <span class="gradient">Connect</span></h2>
                 <p class="section-desc">I'm open to opportunities, collaborations, and conversations.</p>
@@ -1503,7 +2019,8 @@
 
             <div class="contact-wrap">
                 <!-- Left: Contact Info -->
-                <div class="glass-card contact-info-box">
+                <div class="glass-card contact-info-box tilt-card anim-fade-left">
+                    <div class="tilt-shine"></div>
                     <h3>Get in Touch</h3>
 
                     <div class="contact-item">
@@ -1512,11 +2029,11 @@
                     </div>
                     <div class="contact-item">
                         <i class='bx bx-envelope'></i>
-                        <span>thapabipin271@gmail.com</span>
+                        <span>bipintech@icloud.com</span>
                     </div>
                     <div class="contact-item">
                         <i class='bx bx-map-pin'></i>
-                        <span>LAMAHI, Dang, Nepal</span>
+                        <span>Lumbini province, Dang, Nepal</span>
                     </div>
 
                     <div class="contact-status">
@@ -1528,34 +2045,56 @@
                         <a href="https://github.com/bipin890" aria-label="GitHub"><i class='bx bxl-github'></i></a>
                         <a href="https://www.facebook.com/bipiny07" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
                         <a href="https://www.tiktok.com/@_voidwalker.x?_r=1&_t=ZS-97QWrlAcCT2" aria-label="TikTok"><i class='bx bxl-tiktok'></i></a>
-                        <a href="
-https://www.instagram.com/kaelrix_0?igsh=MjM0eDR4NzA1bXpi" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
-                        <a href="#" aria-label="YouTube"><i class='bx bxl-youtube'></i></a>
+                        <a href="https://www.instagram.com/kaelrix_0?igsh=MjM0eDR4NzA1bXpi" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                        <a href="https://www.youtube.com/@bipintechhub" aria-label="YouTube"><i class='bx bxl-youtube'></i></a>
                     </div>
                 </div>
 
-                <!-- Right: NEW "Want to Connect" Card with Gmail -->
-                <div class="glass-card connect-card">
+                <!-- Right: Contact Form -->
+                <div class="glass-card connect-card tilt-card anim-fade-right">
+                    <div class="tilt-shine"></div>
                     <div class="connect-icon">
                         <i class='bx bx-message-rounded-dots'></i>
                     </div>
 
                     <h3>Want to <span class="gradient">Connect</span> with Me?</h3>
-                    <p>I'd love to hear from you! Drop me a message anytime — I'll get back to you as soon as possible.</p>
+                    <p>Have feedback, an idea, or want to work together? Send me a message.</p>
 
-                    <!-- Email Button - Redirects to Gmail -->
-                    <div class="connect-email-box">
-                        <a href="mailto:thapabipin271@gmail.com?subject=Let's%20Connect%20-%20Bipin%20Thapa&body=Hi%20Bipin%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20connect%20with%20you..." target="_blank">
-                            <i class='bx bx-envelope email-icon'></i>
-                            <span class="email-text">thapabipin271@gmail.com</span>
-                            <span class="email-arrow">
-                                <i class='bx bx-paper-plane'></i> Send Email
-                            </span>
-                        </a>
-                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <div class="contact-form-group">
+                            <label for="visitorName">Name</label>
+                            <input type="text" id="visitorName" name="name"
+                                   placeholder="Your name" autocomplete="name" required>
+                        </div>
 
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 16px;">
-                        <i class='bx bx-time'></i> I typically respond within 24 hours
+                        <div class="contact-form-group">
+                            <label for="visitorEmail">Email</label>
+                            <input type="email" id="visitorEmail" name="email"
+                                   placeholder="your@email.com" autocomplete="email" required>
+                        </div>
+
+                        <div class="contact-form-group">
+                            <label for="visitorMessage">Message</label>
+                            <textarea id="visitorMessage" name="message"
+                                      placeholder="Write your message..." required></textarea>
+                        </div>
+
+                        <!-- Honeypot field for simple bot protection -->
+                        <input type="text" name="website" id="website" tabindex="-1"
+                               autocomplete="off" aria-hidden="true"
+                               style="position:absolute;left:-9999px;opacity:0;">
+
+                        <button type="submit" id="sendMessageBtn" class="magnetic-btn">
+                            <i class='bx bx-paper-plane'></i>
+                            Send Message
+                        </button>
+
+                        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+                    </form>
+
+                    <p class="form-note">
+                        <i class='bx bx-lock-alt'></i>
+                        Your name, email, and message are saved to my contact spreadsheet.
                     </p>
                 </div>
             </div>
@@ -1572,288 +2111,681 @@ https://www.instagram.com/kaelrix_0?igsh=MjM0eDR4NzA1bXpi" aria-label="Instagram
     </footer>
 
     <!-- ============================================================
-    THREE.JS
+    LIBRARIES (CDN)
     ============================================================ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.1/dist/lenis.min.js"></script>
 
-    <script>
-        // ============================================================
-        // PRELOADER
-        // ============================================================
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('hidden');
-            }, 600);
-        });
+<script>
+// ============================================================
+// PRELOADER
+// ============================================================
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 1800);
+});
 
-        // ============================================================
-        // HAMBURGER
-        // ============================================================
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
+// ============================================================
+// LENIS SMOOTH SCROLL
+// ============================================================
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    smoothWheel: true,
+});
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('open');
-        });
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('open');
+// Connect Lenis to GSAP ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+// ============================================================
+// CURSOR GLOW
+// ============================================================
+const cursorGlow = document.getElementById('cursorGlow');
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.08;
+    cursorY += (mouseY - cursorY) * 0.08;
+    if (cursorGlow) {
+        cursorGlow.style.transform = `translate(${cursorX - 150}px, ${cursorY - 150}px)`;
+    }
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// ============================================================
+// HAMBURGER
+// ============================================================
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+    });
+});
+
+// ============================================================
+// ACTIVE NAV LINK
+// ============================================================
+const sections = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+
+    let current = '';
+    sections.forEach(section => {
+        const top = section.offsetTop - 120;
+        if (window.scrollY >= top) {
+            current = section.getAttribute('id');
+        }
+    });
+    navAnchors.forEach(anchor => {
+        anchor.classList.remove('active');
+        if (anchor.getAttribute('href') === '#' + current) {
+            anchor.classList.add('active');
+        }
+    });
+});
+
+// ============================================================
+// PROFILE PICTURE FALLBACK
+// ============================================================
+const profileImg = document.getElementById('profileImg');
+if (profileImg) {
+    profileImg.onerror = function() {
+        this.src =
+            'https://ui-avatars.com/api/?name=Bipin+Thapa&size=200&background=0a0f1f&color=a78bfa&bold=true';
+    };
+}
+
+// Subtle 3D network background behind the portrait and hero title.
+(function initHeroNetwork() {
+    const canvas = document.getElementById('hero-network');
+    const hero = document.getElementById('hero');
+    if (!(canvas instanceof HTMLCanvasElement) || !hero) return;
+
+    const context = canvas.getContext('2d');
+    if (!context) {
+        throw new Error('The hero network effect requires 2D canvas support.');
+    }
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pointer = { x: 0, y: 0 };
+    const nodes = [];
+    let width = 0;
+    let height = 0;
+    let pixelRatio = 1;
+
+    function resize() {
+        width = hero.clientWidth;
+        height = hero.clientHeight;
+        pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+        const count = width < 600 ? 64 : 120;
+        nodes.length = 0;
+        for (let i = 0; i < count; i++) {
+            nodes.push({
+                x: (Math.random() - 0.5) * 1.55,
+                y: (Math.random() - 0.5) * 1.35,
+                z: (Math.random() - 0.5) * 560,
+                phase: Math.random() * Math.PI * 2,
+                speed: 0.18 + Math.random() * 0.35,
             });
-        });
+        }
+        render(0);
+    }
 
-        // ============================================================
-        // ACTIVE NAV LINK
-        // ============================================================
-        const sections = document.querySelectorAll('section[id]');
-        const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    function render(time) {
+        context.clearRect(0, 0, width, height);
+        if (!width || !height) return;
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const top = section.offsetTop - 120;
-                if (window.scrollY >= top) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navAnchors.forEach(anchor => {
-                anchor.classList.remove('active');
-                if (anchor.getAttribute('href') === '#' + current) {
-                    anchor.classList.add('active');
-                }
-            });
-        });
-
-        // ============================================================
-        // PROFILE PICTURE FALLBACK
-        // ============================================================
-        const profileImg = document.getElementById('profileImg');
-        if (profileImg) {
-            profileImg.onerror = function() {
-                this.src =
-                    'https://ui-avatars.com/api/?name=Bipin+Thapa&size=200&background=0a0f1f&color=a78bfa&bold=true';
+        const focalLength = Math.max(width, height) * 1.15;
+        const rotation = reducedMotion ? 0 : time * 0.00012;
+        const projected = nodes.map(node => {
+            const angle = rotation + node.phase;
+            const x = node.x * Math.cos(rotation) - node.z / 900 * Math.sin(rotation);
+            const z = node.z * Math.cos(rotation) + node.x * 260 * Math.sin(rotation);
+            const y = node.y + (reducedMotion ? 0 : Math.sin(time * 0.00045 * node.speed + angle) * 0.025);
+            const perspective = focalLength / (focalLength + z);
+            return {
+                x: width / 2 + (x + pointer.x * 0.035) * width * perspective,
+                y: height * 0.47 + (y + pointer.y * 0.035) * height * perspective,
+                z,
+                perspective,
             };
+        });
+
+        for (let i = 0; i < projected.length; i++) {
+            const first = projected[i];
+            for (let j = i + 1; j < projected.length; j++) {
+                const second = projected[j];
+                const dx = first.x - second.x;
+                const dy = first.y - second.y;
+                const distance = Math.hypot(dx, dy);
+                if (distance > 175) continue;
+
+                const depthAlpha = 1 - distance / 175;
+                context.beginPath();
+                context.moveTo(first.x, first.y);
+                context.lineTo(second.x, second.y);
+                context.strokeStyle = `rgba(137, 155, 255, ${depthAlpha * 0.16})`;
+                context.lineWidth = 0.7;
+                context.stroke();
+            }
         }
 
-        // ============================================================
-        // THREE.JS - 3D Scene
-        // ============================================================
-        (function initThree() {
-            const canvas = document.getElementById('three-canvas');
-            if (!canvas) return;
-
-            const scene = new THREE.Scene();
-
-            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 0, 10);
-
-            const renderer = new THREE.WebGLRenderer({
-                canvas: canvas,
-                alpha: true,
-                antialias: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            const world = new THREE.Group();
-            scene.add(world);
-
-            // Octahedron
-            const octaGeo = new THREE.OctahedronGeometry(0.6);
-            const octaMat = new THREE.MeshStandardMaterial({
-                color: 0xa78bfa,
-                emissive: 0xa78bfa,
-                emissiveIntensity: 0.05,
-                metalness: 0.2,
-                roughness: 0.3,
-                transparent: true,
-                opacity: 0.5
-            });
-            const octa = new THREE.Mesh(octaGeo, octaMat);
-            octa.position.set(-2.8, 0.6, 0);
-            world.add(octa);
-
-            const octaWire = new THREE.Mesh(
-                new THREE.OctahedronGeometry(0.65),
-                new THREE.MeshBasicMaterial({
-                    color: 0xf472b6,
-                    wireframe: true,
-                    transparent: true,
-                    opacity: 0.1
-                })
-            );
-            octaWire.position.copy(octa.position);
-            world.add(octaWire);
-
-            // Tetrahedron
-            const tetraGeo = new THREE.TetrahedronGeometry(0.7);
-            const tetraMat = new THREE.MeshStandardMaterial({
-                color: 0xf472b6,
-                emissive: 0xf472b6,
-                emissiveIntensity: 0.04,
-                metalness: 0.1,
-                roughness: 0.4,
-                transparent: true,
-                opacity: 0.4
-            });
-            const tetra = new THREE.Mesh(tetraGeo, tetraMat);
-            tetra.position.set(2.8, -0.4, 0);
-            world.add(tetra);
-
-            const tetraWire = new THREE.Mesh(
-                new THREE.TetrahedronGeometry(0.75),
-                new THREE.MeshBasicMaterial({
-                    color: 0x60a5fa,
-                    wireframe: true,
-                    transparent: true,
-                    opacity: 0.1
-                })
-            );
-            tetraWire.position.copy(tetra.position);
-            world.add(tetraWire);
-
-            // Rings
-            const ringGroup = new THREE.Group();
-            const ringGeo = new THREE.TorusGeometry(1.2, 0.02, 16, 64);
-            const ringMat = new THREE.MeshStandardMaterial({
-                color: 0x60a5fa,
-                emissive: 0x60a5fa,
-                emissiveIntensity: 0.1,
-                transparent: true,
-                opacity: 0.2
-            });
-            const ring = new THREE.Mesh(ringGeo, ringMat);
-            ring.rotation.x = Math.PI / 2.5;
-            ring.rotation.z = 0.4;
-            ringGroup.add(ring);
-
-            const ring2 = new THREE.Mesh(
-                new THREE.TorusGeometry(0.9, 0.015, 16, 64),
-                new THREE.MeshStandardMaterial({
-                    color: 0xfbbf24,
-                    emissive: 0xfbbf24,
-                    emissiveIntensity: 0.08,
-                    transparent: true,
-                    opacity: 0.15
-                })
-            );
-            ring2.rotation.x = Math.PI / 3.5;
-            ring2.rotation.z = -0.5;
-            ringGroup.add(ring2);
-
-            ringGroup.position.set(0, 0.2, 0);
-            world.add(ringGroup);
-
-            // Core Sphere
-            const sphereGeo = new THREE.SphereGeometry(0.35, 24, 24);
-            const sphereMat = new THREE.MeshStandardMaterial({
-                color: 0x34d399,
-                emissive: 0x34d399,
-                emissiveIntensity: 0.1,
-                metalness: 0.3,
-                roughness: 0.2,
-                transparent: true,
-                opacity: 0.4
-            });
-            const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-            sphere.position.set(0, 0, 0);
-            world.add(sphere);
-
-            // Particles
-            const particleGeo = new THREE.BufferGeometry();
-            const particleCount = 300;
-            const posArray = new Float32Array(particleCount * 3);
-            for (let i = 0; i < particleCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 14;
-            }
-            particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-            const particleMat = new THREE.PointsMaterial({
-                size: 0.03,
-                color: 0xa78bfa,
-                transparent: true,
-                opacity: 0.3,
-                blending: THREE.AdditiveBlending
-            });
-            const particles = new THREE.Points(particleGeo, particleMat);
-            world.add(particles);
-
-            // Lights
-            const ambient = new THREE.AmbientLight(0x222244, 0.4);
-            scene.add(ambient);
-
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
-            dirLight.position.set(2, 3, 5);
-            scene.add(dirLight);
-
-            const pl1 = new THREE.PointLight(0xa78bfa, 0.3, 10);
-            pl1.position.set(-2, 1, 3);
-            scene.add(pl1);
-
-            const pl2 = new THREE.PointLight(0xf472b6, 0.2, 10);
-            pl2.position.set(2, -1, 3);
-            scene.add(pl2);
-
-            let mouseX = 0,
-                mouseY = 0;
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-            });
-
-            window.addEventListener('resize', () => {
-                const w = window.innerWidth;
-                const h = window.innerHeight;
-                camera.aspect = w / h;
-                camera.updateProjectionMatrix();
-                renderer.setSize(w, h);
-            });
-
-            function animate() {
-                requestAnimationFrame(animate);
-
-                octa.rotation.x += 0.005;
-                octa.rotation.y += 0.008;
-                octaWire.rotation.x += 0.005;
-                octaWire.rotation.y += 0.008;
-
-                tetra.rotation.x += 0.007;
-                tetra.rotation.y += 0.006;
-                tetraWire.rotation.x += 0.007;
-                tetraWire.rotation.y += 0.006;
-
-                ringGroup.rotation.y += 0.006;
-                ringGroup.rotation.x += 0.003;
-
-                sphere.rotation.x += 0.01;
-                sphere.rotation.y += 0.015;
-
-                particles.rotation.y += 0.0004;
-
-                world.position.x = mouseX * 0.2;
-                world.position.y = mouseY * 0.15;
-
-                renderer.render(scene, camera);
-            }
-            animate();
-        })();
-
-        // ============================================================
-        // SMOOTH SCROLL
-        // ============================================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
+        projected.forEach((node, index) => {
+            const radius = Math.max(1, Math.min(2.4, node.perspective * 1.7));
+            context.beginPath();
+            context.arc(node.x, node.y, radius, 0, Math.PI * 2);
+            context.fillStyle = index % 5 === 0
+                ? 'rgba(244, 114, 182, 0.65)'
+                : 'rgba(147, 168, 255, 0.72)';
+            context.fill();
         });
-    </script>
+
+    }
+
+    function animate(time) {
+        render(time);
+        requestAnimationFrame(animate);
+    }
+
+    hero.addEventListener('pointermove', event => {
+        const bounds = hero.getBoundingClientRect();
+        pointer.x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        pointer.y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    });
+    hero.addEventListener('pointerleave', () => {
+        pointer.x = 0;
+        pointer.y = 0;
+    });
+    window.addEventListener('resize', resize);
+    resize();
+    if (!reducedMotion) requestAnimationFrame(animate);
+})();
+
+// ============================================================
+// GSAP ANIMATIONS
+// ============================================================
+gsap.registerPlugin(ScrollTrigger);
+
+const educationCards = [...document.querySelectorAll('.edu-toggle')];
+const educationMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const educationModal = document.getElementById('education-modal');
+const educationModalCard = educationModal.querySelector('.edu-modal-card');
+const educationModalClose = educationModal.querySelector('.edu-modal-close');
+const educationModalYear = document.getElementById('edu-modal-year');
+const educationModalTitle = document.getElementById('edu-modal-title');
+const educationModalSubtitle = document.getElementById('edu-modal-subtitle');
+const educationModalContent = document.getElementById('edu-modal-content');
+let educationModalAnimation;
+let educationModalTrigger;
+let educationModalClosing = false;
+let educationScrollPosition = 0;
+let educationScrollStyles;
+
+function lockEducationPageScroll() {
+    educationScrollPosition = window.scrollY;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    educationScrollStyles = {
+        htmlOverflow: document.documentElement.style.overflow,
+        bodyOverflow: document.body.style.overflow,
+        bodyPosition: document.body.style.position,
+        bodyTop: document.body.style.top,
+        bodyLeft: document.body.style.left,
+        bodyRight: document.body.style.right,
+        bodyWidth: document.body.style.width,
+        bodyPaddingRight: document.body.style.paddingRight,
+    };
+
+    lenis.stop();
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${educationScrollPosition}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+}
+
+function unlockEducationPageScroll() {
+    if (!educationScrollStyles) return;
+
+    document.documentElement.style.overflow = educationScrollStyles.htmlOverflow;
+    document.body.style.overflow = educationScrollStyles.bodyOverflow;
+    document.body.style.position = educationScrollStyles.bodyPosition;
+    document.body.style.top = educationScrollStyles.bodyTop;
+    document.body.style.left = educationScrollStyles.bodyLeft;
+    document.body.style.right = educationScrollStyles.bodyRight;
+    document.body.style.width = educationScrollStyles.bodyWidth;
+    document.body.style.paddingRight = educationScrollStyles.bodyPaddingRight;
+    window.scrollTo(0, educationScrollPosition);
+    lenis.start();
+    lenis.scrollTo(educationScrollPosition, { immediate: true });
+    educationScrollStyles = null;
+}
+
+function finishEducationModalClose() {
+    educationModal.hidden = true;
+    educationModal.inert = true;
+    educationModal.setAttribute('aria-hidden', 'true');
+    educationModalClosing = false;
+    unlockEducationPageScroll();
+    educationModalTrigger?.focus();
+}
+
+function closeEducationModal() {
+    if (!educationModalAnimation || educationModalClosing) return;
+    educationModalClosing = true;
+    educationModalAnimation.kill();
+
+    if (educationMotionPreference.matches) {
+        finishEducationModalClose();
+        return;
+    }
+
+    const lines = educationModalContent.querySelectorAll('p');
+    educationModalAnimation = gsap.timeline({
+        onComplete: finishEducationModalClose,
+    })
+        .to(educationModal, {
+            opacity: 0,
+            duration: 0.2,
+            ease: 'power2.in',
+        }, 0)
+        .to(educationModalCard, {
+            opacity: 0,
+            scale: 0.96,
+            y: 8,
+            duration: 0.24,
+            ease: 'power2.in',
+        }, 0)
+        .to(lines, {
+            opacity: 0,
+            y: -6,
+            duration: 0.12,
+            stagger: { each: 0.035, from: 'end' },
+            ease: 'power1.in',
+        }, 0);
+}
+
+function openEducationModal(trigger) {
+    const detailsId = trigger.dataset.eduDetails;
+    const detailsTemplate = detailsId ? document.getElementById(detailsId) : null;
+    if (!(detailsTemplate instanceof HTMLTemplateElement)) {
+        throw new Error('Education card is missing its details template.');
+    }
+
+    if (educationModalAnimation) educationModalAnimation.kill();
+    educationModalClosing = false;
+    educationModalTrigger = trigger;
+    educationModalYear.textContent = trigger.querySelector('.edu-year').textContent.trim();
+    educationModalTitle.textContent = trigger.querySelector('.edu-info-title').textContent.trim();
+    const school = trigger.querySelector('.school').textContent.trim();
+    const date = trigger.querySelector('.date').textContent.trim();
+    educationModalSubtitle.textContent = `${school} · ${date}`;
+    educationModalContent.replaceChildren(detailsTemplate.content.cloneNode(true));
+
+    educationModal.hidden = false;
+    educationModal.inert = false;
+    educationModal.setAttribute('aria-hidden', 'false');
+    lockEducationPageScroll();
+
+    const lines = educationModalContent.querySelectorAll('p');
+    const reducedMotion = educationMotionPreference.matches;
+    educationModalAnimation = gsap.timeline({
+        paused: true,
+    })
+        .fromTo(educationModal, { opacity: 0 }, {
+            opacity: 1,
+            duration: reducedMotion ? 0 : 0.22,
+            ease: 'power2.out',
+        }, 0)
+        .fromTo(educationModalCard, {
+            opacity: 0,
+            scale: 0.94,
+            y: 14,
+        }, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: reducedMotion ? 0 : 0.32,
+            ease: 'power2.out',
+        }, 0)
+        .fromTo(lines, {
+            opacity: 0,
+            y: 10,
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: reducedMotion ? 0 : 0.24,
+            stagger: reducedMotion ? 0 : 0.1,
+            ease: 'power2.out',
+        }, reducedMotion ? 0 : 0.14);
+
+    educationModalAnimation.play(0);
+    requestAnimationFrame(() => educationModalClose.focus({ preventScroll: true }));
+}
+
+educationCards.forEach(trigger => {
+    trigger.addEventListener('click', () => openEducationModal(trigger));
+});
+
+educationModalClose.addEventListener('click', closeEducationModal);
+educationModal.addEventListener('click', event => {
+    if (event.target === educationModal) closeEducationModal();
+});
+document.addEventListener('keydown', event => {
+    if (educationModal.hidden) return;
+    if (event.key === 'Escape') {
+        event.preventDefault();
+        closeEducationModal();
+        return;
+    }
+    if (event.key !== 'Tab') return;
+
+    const focusable = [...educationModal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+    if (!focusable.length) {
+        event.preventDefault();
+        educationModalCard.focus();
+        return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+    }
+});
+
+// Hero entrance sequence
+const heroTl = gsap.timeline({ delay: 2 });
+heroTl
+    .to('.hero-anim-avatar', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: 'back.out(1.7)',
+    })
+    .to('.hero-anim-content', {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power3.out',
+    }, '-=0.4');
+
+// Section headers
+gsap.utils.toArray('.anim-fade-up').forEach(el => {
+    gsap.to(el, {
+        scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+    });
+});
+
+// Fade left
+gsap.utils.toArray('.anim-fade-left').forEach(el => {
+    gsap.to(el, {
+        scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        x: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+    });
+});
+
+// Fade right
+gsap.utils.toArray('.anim-fade-right').forEach(el => {
+    gsap.to(el, {
+        scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        x: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+    });
+});
+
+// Scale in (Gallery)
+gsap.utils.toArray('.anim-scale-in').forEach((el, i) => {
+    gsap.to(el, {
+        scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        delay: i * 0.08,
+        ease: 'back.out(1.4)',
+    });
+});
+
+// Pop in (Skills + Interests)
+gsap.utils.toArray('.anim-pop-in').forEach((el, i) => {
+    gsap.to(el, {
+        scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.6,
+        delay: i * 0.06,
+        ease: 'back.out(2)',
+    });
+});
+
+// Parallax on section backgrounds
+gsap.utils.toArray('section').forEach(section => {
+    gsap.to(section, {
+        scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+        },
+        backgroundPositionY: '50%',
+    });
+});
+
+// ============================================================
+// 3D TILT EFFECT
+// ============================================================
+document.querySelectorAll('.tilt-card').forEach(card => {
+    const shine = card.querySelector('.tilt-shine');
+
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        if (shine) {
+            const pctX = (x / rect.width) * 100;
+            const pctY = (y / rect.height) * 100;
+            shine.style.setProperty('--shine-x', pctX + '%');
+            shine.style.setProperty('--shine-y', pctY + '%');
+            shine.style.opacity = '1';
+        }
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        if (shine) shine.style.opacity = '0';
+
+        setTimeout(() => {
+            card.style.transition = '';
+        }, 500);
+    });
+
+    card.addEventListener('mouseenter', () => {
+        card.style.transition = 'none';
+    });
+});
+
+// ============================================================
+// MAGNETIC BUTTONS
+// ============================================================
+document.querySelectorAll('.magnetic-btn').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+        btn.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        setTimeout(() => { btn.style.transition = ''; }, 400);
+    });
+
+    btn.addEventListener('mouseenter', () => {
+        btn.style.transition = 'none';
+    });
+});
+
+// ============================================================
+// SMOOTH SCROLL for anchor links (via Lenis)
+// ============================================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            lenis.scrollTo(target, { offset: -60 });
+        }
+    });
+});
+
+// ============================================================
+// CONTACT FORM -> GOOGLE SHEETS
+// ============================================================
+const CONTACT_SCRIPT_URL =
+    'https://script.google.com/macros/s/AKfycbzOllUvrZVAP8dRraZ92Tyh_vKfspjSHfrAl7-3nKgcwdngZO9R94J4zHwnQd5lhxQM/exec';
+
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById('visitorName').value.trim();
+        const email = document.getElementById('visitorEmail').value.trim();
+        const message = document.getElementById('visitorMessage').value.trim();
+        const honeypot = document.getElementById('website').value.trim();
+
+        if (honeypot) return;
+
+        if (!name || !email || !message) {
+            formStatus.textContent = 'Please fill in all fields.';
+            formStatus.className = 'form-status error';
+            return;
+        }
+
+        sendMessageBtn.disabled = true;
+        sendMessageBtn.innerHTML =
+            "<i class='bx bx-loader-alt bx-spin'></i> Sending...";
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        try {
+            const data = new URLSearchParams();
+            data.append('name', name);
+            data.append('email', email);
+            data.append('message', message);
+
+            await fetch(CONTACT_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: data
+            });
+
+            formStatus.textContent =
+                '✓ Message sent successfully. Thank you for reaching out!';
+            formStatus.className = 'form-status success';
+            contactForm.reset();
+
+        } catch (error) {
+            console.error('Contact form error:', error);
+            formStatus.textContent =
+                'Could not send the message. Please try again.';
+            formStatus.className = 'form-status error';
+
+        } finally {
+            sendMessageBtn.disabled = false;
+            sendMessageBtn.innerHTML =
+                "<i class='bx bx-paper-plane'></i> Send Message";
+        }
+    });
+}
+</script>
 
 </body>
 </html>
